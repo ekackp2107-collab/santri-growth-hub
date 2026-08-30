@@ -14,6 +14,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedAchievementsRouteImport } from './routes/_authenticated/achievements'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedIncidentsRouteImport } from './routes/_authenticated/incidents'
 import { Route as AuthenticatedSantriIndexRouteImport } from './routes/_authenticated/santri.index'
 import { Route as AuthenticatedSantriIdRouteImport } from './routes/_authenticated/santri.$id'
 
@@ -42,6 +43,11 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedIncidentsRoute = AuthenticatedIncidentsRouteImport.update({
+  id: '/incidents',
+  path: '/incidents',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedSantriIndexRoute =
   AuthenticatedSantriIndexRouteImport.update({
     id: '/santri/',
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/achievements': typeof AuthenticatedAchievementsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/incidents': typeof AuthenticatedIncidentsRoute
   '/santri/$id': typeof AuthenticatedSantriIdRoute
   '/santri/': typeof AuthenticatedSantriIndexRoute
 }
@@ -67,6 +74,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/achievements': typeof AuthenticatedAchievementsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/incidents': typeof AuthenticatedIncidentsRoute
   '/santri/$id': typeof AuthenticatedSantriIdRoute
   '/santri': typeof AuthenticatedSantriIndexRoute
 }
@@ -77,15 +85,29 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/_authenticated/achievements': typeof AuthenticatedAchievementsRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/incidents': typeof AuthenticatedIncidentsRoute
   '/_authenticated/santri/$id': typeof AuthenticatedSantriIdRoute
   '/_authenticated/santri/': typeof AuthenticatedSantriIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/auth' | '/achievements' | '/dashboard' | '/santri/$id' | '/santri/'
+    | '/'
+    | '/auth'
+    | '/achievements'
+    | '/dashboard'
+    | '/incidents'
+    | '/santri/$id'
+    | '/santri/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/achievements' | '/dashboard' | '/santri/$id' | '/santri'
+  to:
+    | '/'
+    | '/auth'
+    | '/achievements'
+    | '/dashboard'
+    | '/incidents'
+    | '/santri/$id'
+    | '/santri'
   id:
     | '__root__'
     | '/'
@@ -93,6 +115,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/_authenticated/achievements'
     | '/_authenticated/dashboard'
+    | '/_authenticated/incidents'
     | '/_authenticated/santri/$id'
     | '/_authenticated/santri/'
   fileRoutesById: FileRoutesById
@@ -140,6 +163,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/incidents': {
+      id: '/_authenticated/incidents'
+      path: '/incidents'
+      fullPath: '/incidents'
+      preLoaderRoute: typeof AuthenticatedIncidentsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/santri/': {
       id: '/_authenticated/santri/'
       path: '/santri'
@@ -160,6 +190,7 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAchievementsRoute: typeof AuthenticatedAchievementsRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedIncidentsRoute: typeof AuthenticatedIncidentsRoute
   AuthenticatedSantriIdRoute: typeof AuthenticatedSantriIdRoute
   AuthenticatedSantriIndexRoute: typeof AuthenticatedSantriIndexRoute
 }
@@ -167,6 +198,7 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAchievementsRoute: AuthenticatedAchievementsRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedIncidentsRoute: AuthenticatedIncidentsRoute,
   AuthenticatedSantriIdRoute: AuthenticatedSantriIdRoute,
   AuthenticatedSantriIndexRoute: AuthenticatedSantriIndexRoute,
 }
