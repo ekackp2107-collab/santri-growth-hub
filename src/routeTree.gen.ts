@@ -14,6 +14,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedSantriIndexRouteImport } from './routes/_authenticated/santri.index'
+import { Route as AuthenticatedSantriIdRouteImport } from './routes/_authenticated/santri.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,17 +41,24 @@ const AuthenticatedSantriIndexRoute =
     path: '/santri/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedSantriIdRoute = AuthenticatedSantriIdRouteImport.update({
+  id: '/santri/$id',
+  path: '/santri/$id',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/santri/$id': typeof AuthenticatedSantriIdRoute
   '/santri/': typeof AuthenticatedSantriIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/santri/$id': typeof AuthenticatedSantriIdRoute
   '/santri': typeof AuthenticatedSantriIndexRoute
 }
 export interface FileRoutesById {
@@ -59,19 +67,21 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/santri/$id': typeof AuthenticatedSantriIdRoute
   '/_authenticated/santri/': typeof AuthenticatedSantriIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/dashboard' | '/santri/'
+  fullPaths: '/' | '/auth' | '/dashboard' | '/santri/$id' | '/santri/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/dashboard' | '/santri'
+  to: '/' | '/auth' | '/dashboard' | '/santri/$id' | '/santri'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
     | '/_authenticated/dashboard'
+    | '/_authenticated/santri/$id'
     | '/_authenticated/santri/'
   fileRoutesById: FileRoutesById
 }
@@ -118,16 +128,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSantriIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/santri/$id': {
+      id: '/_authenticated/santri/$id'
+      path: '/santri/$id'
+      fullPath: '/santri/$id'
+      preLoaderRoute: typeof AuthenticatedSantriIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedSantriIdRoute: typeof AuthenticatedSantriIdRoute
   AuthenticatedSantriIndexRoute: typeof AuthenticatedSantriIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedSantriIdRoute: AuthenticatedSantriIdRoute,
   AuthenticatedSantriIndexRoute: AuthenticatedSantriIndexRoute,
 }
 
