@@ -44,7 +44,7 @@ export function GlobalSearch({ open, onOpenChange }: { open: boolean; onOpenChan
   });
 
   return (
-    <CommandDialog open={open} onOpenChange={onOpenChange} shouldFilter={false}>
+    <CommandDialog open={open} onOpenChange={onOpenChange}>
       <CommandInput placeholder="Cari santri, prestasi..." value={term} onValueChange={setTerm} />
       <CommandList>
         <CommandEmpty>Belum ada hasil</CommandEmpty>
@@ -53,7 +53,7 @@ export function GlobalSearch({ open, onOpenChange }: { open: boolean; onOpenChan
             {results.data.santri.map((s) => (
               <CommandItem
                 key={s.id as string}
-                value={s.id as string}
+                value={`${s.nama} ${s.nis}`}
                 onSelect={() => {
                   onOpenChange(false);
                   navigate({ to: "/santri/$id", params: { id: s.id as string } });
@@ -75,7 +75,7 @@ export function GlobalSearch({ open, onOpenChange }: { open: boolean; onOpenChan
             {results.data.ach.map((a) => (
               <CommandItem
                 key={a.id}
-                value={a.id}
+                value={a.event_name ?? a.id}
                 onSelect={() => {
                   onOpenChange(false);
                   navigate({ to: "/achievements" });
