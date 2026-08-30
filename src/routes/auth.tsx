@@ -33,7 +33,7 @@ function AuthPage() {
   const demoFn = useServerFn(getDemoCredentials);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
+  const [errors, setErrors] = useState<{ email?: string | undefined; password?: string | undefined }>({});
   const [loading, setLoading] = useState(false);
   const [devLoading, setDevLoading] = useState<string | null>(null);
 
