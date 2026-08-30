@@ -16,6 +16,7 @@ import { Route as AuthenticatedAchievementsRouteImport } from './routes/_authent
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedGuidanceRouteImport } from './routes/_authenticated/guidance'
 import { Route as AuthenticatedIncidentsRouteImport } from './routes/_authenticated/incidents'
+import { Route as AuthenticatedRecognitionRouteImport } from './routes/_authenticated/recognition'
 import { Route as AuthenticatedSantriIndexRouteImport } from './routes/_authenticated/santri.index'
 import { Route as AuthenticatedSantriIdRouteImport } from './routes/_authenticated/santri.$id'
 
@@ -54,6 +55,12 @@ const AuthenticatedIncidentsRoute = AuthenticatedIncidentsRouteImport.update({
   path: '/incidents',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedRecognitionRoute =
+  AuthenticatedRecognitionRouteImport.update({
+    id: '/recognition',
+    path: '/recognition',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedSantriIndexRoute =
   AuthenticatedSantriIndexRouteImport.update({
     id: '/santri/',
@@ -73,6 +80,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/guidance': typeof AuthenticatedGuidanceRoute
   '/incidents': typeof AuthenticatedIncidentsRoute
+  '/recognition': typeof AuthenticatedRecognitionRoute
   '/santri/$id': typeof AuthenticatedSantriIdRoute
   '/santri/': typeof AuthenticatedSantriIndexRoute
 }
@@ -83,6 +91,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/guidance': typeof AuthenticatedGuidanceRoute
   '/incidents': typeof AuthenticatedIncidentsRoute
+  '/recognition': typeof AuthenticatedRecognitionRoute
   '/santri/$id': typeof AuthenticatedSantriIdRoute
   '/santri': typeof AuthenticatedSantriIndexRoute
 }
@@ -95,6 +104,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/guidance': typeof AuthenticatedGuidanceRoute
   '/_authenticated/incidents': typeof AuthenticatedIncidentsRoute
+  '/_authenticated/recognition': typeof AuthenticatedRecognitionRoute
   '/_authenticated/santri/$id': typeof AuthenticatedSantriIdRoute
   '/_authenticated/santri/': typeof AuthenticatedSantriIndexRoute
 }
@@ -107,6 +117,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/guidance'
     | '/incidents'
+    | '/recognition'
     | '/santri/$id'
     | '/santri/'
   fileRoutesByTo: FileRoutesByTo
@@ -117,6 +128,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/guidance'
     | '/incidents'
+    | '/recognition'
     | '/santri/$id'
     | '/santri'
   id:
@@ -128,6 +140,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard'
     | '/_authenticated/guidance'
     | '/_authenticated/incidents'
+    | '/_authenticated/recognition'
     | '/_authenticated/santri/$id'
     | '/_authenticated/santri/'
   fileRoutesById: FileRoutesById
@@ -189,6 +202,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedIncidentsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/recognition': {
+      id: '/_authenticated/recognition'
+      path: '/recognition'
+      fullPath: '/recognition'
+      preLoaderRoute: typeof AuthenticatedRecognitionRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/santri/': {
       id: '/_authenticated/santri/'
       path: '/santri'
@@ -211,6 +231,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedGuidanceRoute: typeof AuthenticatedGuidanceRoute
   AuthenticatedIncidentsRoute: typeof AuthenticatedIncidentsRoute
+  AuthenticatedRecognitionRoute: typeof AuthenticatedRecognitionRoute
   AuthenticatedSantriIdRoute: typeof AuthenticatedSantriIdRoute
   AuthenticatedSantriIndexRoute: typeof AuthenticatedSantriIndexRoute
 }
@@ -220,6 +241,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedGuidanceRoute: AuthenticatedGuidanceRoute,
   AuthenticatedIncidentsRoute: AuthenticatedIncidentsRoute,
+  AuthenticatedRecognitionRoute: AuthenticatedRecognitionRoute,
   AuthenticatedSantriIdRoute: AuthenticatedSantriIdRoute,
   AuthenticatedSantriIndexRoute: AuthenticatedSantriIndexRoute,
 }
